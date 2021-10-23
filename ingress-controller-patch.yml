@@ -4,6 +4,11 @@ kind: DaemonSet
 metadata:
   name: ingress-nginx-controller-internal
   namespace: ingress-nginx-internal
+  annotations:
+    keel.sh/policy: force
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@hourly"
+    keel.sh/match-tag: true
 spec:
   template:
     spec:
