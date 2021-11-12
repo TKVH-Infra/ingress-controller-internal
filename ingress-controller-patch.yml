@@ -23,7 +23,7 @@ spec:
             requests:
               cpu: 100m
               memory: 160Mi
-            limit:
+            limits:
               memory: 200Mi
       affinity:
         nodeAffinity:
