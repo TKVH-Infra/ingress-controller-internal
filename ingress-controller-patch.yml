@@ -19,6 +19,12 @@ spec:
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
             - --default-ssl-certificate=cert-manager/wildcard-internal-tls
+          resources:
+            requests:
+              cpu: 100m
+              memory: 160Mi
+            limit:
+              memory: 200Mi
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -29,9 +35,3 @@ spec:
                 operator: In
                 values:
                 - home
-          resources:
-            requests:
-              cpu: 100m
-              memory: 160Mi
-            limit:
-              memory: 200Mi
