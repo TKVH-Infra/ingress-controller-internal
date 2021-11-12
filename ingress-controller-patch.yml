@@ -1,6 +1,6 @@
 # Source: ingress-nginx/templates/controller-deployment.yaml
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: ingress-nginx-controller-internal
   namespace: ingress-nginx-internal
@@ -19,3 +19,19 @@ spec:
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
             - --default-ssl-certificate=cert-manager/wildcard-internal-tls
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: location
+                operator: In
+                values:
+                - home
+          resources:
+            requests:
+              cpu: 100m
+              memory: 160Mi
+            limit:
+              memory: 200Mi
